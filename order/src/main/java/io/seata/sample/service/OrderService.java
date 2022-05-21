@@ -15,10 +15,13 @@
  */
 package io.seata.sample.service;
 
+import io.seata.core.context.RootContext;
 import io.seata.sample.feign.UserFeignClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 
 /**
  * @author jimin.jm@alibaba-inc.com
@@ -45,6 +48,12 @@ public class OrderService {
             new Object[] {userId, commodityCode, count, orderMoney});
 
         userFeignClient.reduce(userId, orderMoney);
+        String unbind = RootContext.unbind();
+        System.out.println("XID===>"+unbind);
+        jdbcTemplate.update("insert order_tbl(user_id,commodity_code,count,money) values(?,?,?,?)",
+                new Object[]{"U2000", "C20000", 200, 10000});
+        RootContext.bind(unbind);
+        throw new RuntimeException("异常-测试");
 
     }
 }

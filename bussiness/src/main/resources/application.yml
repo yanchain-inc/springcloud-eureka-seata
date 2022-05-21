@@ -10,7 +10,7 @@ spring:
 logging:
   level:
     io:
-      seata: debug
+      seata: warn
 eureka:
   instance:
     hostname: 127.0.0.1
