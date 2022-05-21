@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: eureka-server
+server:
+  port: 8761
+eureka:
+  server:
+    #    设为false，关闭自我保护
+    enable-self-preservation: false
+    #   指定 Eviction Task 定时任务的调度频率,用于剔除过期的实例
+    eviction-interval-timer-in-ms: 5000
+    #   默认180s 有效防止的问题是：应用实例下线时有告知Eureka server下线，但是由于Eureka server的REST API有response cache，因此需要等待缓存过期才能更新
+    response-cache-auto-expiration-in-seconds: 60
+    #    2min 默认15分钟
+    #    renewal-threshold-update-interval-ms: 120000
+    expected-client-renewal-interval-seconds: 5
+    #    禁用Eureka的ReadOnlyMap缓存
+    use-read-only-response-cache: false
+    #    注册信息缓存更新间隔（s），默认30秒
+    response-cache-update-interval-ms: 5000
+    #    设置eureka server同步失败的等待时间，默认5分钟，在这期间它不向客户端提供服务注册信息
+    wait-time-in-ms-when-sync-empty: 60000
+  instance:
+    hostname: eureka02
+    #    续约更新时间间隔（默认30秒）
+    lease-renewal-interval-in-seconds: 15
+    #    续约到期时间（默认90秒）
+    lease-expiration-duration-in-seconds: 30
+    prefer-ip-address: true
+    instance-id: ${eruka.instance.hostname}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://localhost:8767/eureka/

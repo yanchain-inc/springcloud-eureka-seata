@@ -1,0 +1,50 @@
+server:
+  port: 8084
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/seata_test?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+  main:
+    allow-bean-definition-overriding: true
+logging:
+  level:
+    io:
+      seata: debug
+eureka:
+  instance:
+    hostname: 127.0.0.1
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 30000 #单位毫秒
+        readTimeout: 30000 #单位毫秒
+seata:
+  #事务群组（可以每个应用独立取名，也可以使用相同的名字），要与服务端nacos-config.txt中service.vgroup_mapping中存在,并且要保证多个群组情况下后缀名要保持一致-tx_group
+  enabled: true
+  enable-auto-data-source-proxy: true #是否开启数据源自动代理,默认为true
+  tx-service-group: fsp_tx_group #要与配置文件中的vgroupMapping一致
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server #配置自己的seata服务
+      server-addr: http://8.141.164.247:8848 #配置自己的nacos地址
+      username: nacos
+      password: nacos
+      cluster: default # 配置自己的seata服务cluster, 默认为 default
+      group: SEATA_GROUP #根据自己的seata服务配置
+      namespace: 1d7d6a37-f0da-4c55-b350-2478443b0227 #改为自己的nacos的namespace,这里填写的是刚才创建seata命名空间的id
+  config:
+    type: nacos  #默认file,如果使用file不配置下面的nacos,直接配置seata.service
+    nacos:
+      server-addr: http://8.141.164.247:8848
+      group: SEATA_GROUP
+      username: nacos
+      password: nacos
+      data-id: seataServer.properties #配置自己的dataId,由于搭建服务端时把客户端的配置也写在了seataServer.properties,所以这里用了和服务端一样的配置文件,实际客户端和服务端的配置文件分离出来更好
+      namespace: 1d7d6a37-f0da-4c55-b350-2478443b0227

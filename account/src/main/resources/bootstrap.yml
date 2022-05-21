@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: account-service
+  cloud:
+    nacos:
+      config:
+        enabled: false

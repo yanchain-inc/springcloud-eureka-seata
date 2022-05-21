@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: stock-service
+  cloud:
+    nacos:
+      config:
+        enabled: false
