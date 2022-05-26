@@ -19,8 +19,8 @@ import javax.sql.DataSource;
 
 import com.alibaba.druid.pool.DruidDataSource;
 
-import io.seata.rm.datasource.DataSourceProxy;
-import io.seata.spring.annotation.datasource.EnableAutoDataSourceProxy;
+//import io.seata.rm.datasource.DataSourceProxy;
+//import io.seata.spring.annotation.datasource.EnableAutoDataSourceProxy;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -38,7 +38,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 @SpringBootApplication
 @EnableFeignClients
 @EnableEurekaClient
-@EnableAutoDataSourceProxy
+//@EnableAutoDataSourceProxy
 public class OrderApplication {
 
     public static void main(String[] args) {

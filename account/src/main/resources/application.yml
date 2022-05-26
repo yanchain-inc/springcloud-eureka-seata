@@ -1,16 +1,60 @@
 server:
   port: 8083
 spring:
-  datasource:
-    url: jdbc:mysql://127.0.0.1:3306/seata_test?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false&allowPublicKeyRetrieval=true
-    username: root
-    password: 123456
+#  datasource:
+#    url: jdbc:mysql://127.0.0.1:3306/seata_test?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false&allowPublicKeyRetrieval=true
+#    username: root
+#    password: 123456
   main:
     allow-bean-definition-overriding: true
+  shardingsphere:
+    datasource:
+      names: write-ds,read-ds
+      write-ds:
+        url: jdbc:mysql://8.131.249.203:3307/robot_test?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false&allowPublicKeyRetrieval=true
+        type: com.alibaba.druid.pool.DruidDataSource
+        driverClassName: com.mysql.cj.jdbc.Driver
+        username: root
+        password: sAy9feUl<0>h
+#        minimum-idle: 60
+#        maximum-pool-size: 500
+#        idle-timeout: 30000
+#        pool-name: MasterHikariCP
+#        max-lifetime: 120000
+#        connection-timeout: 30000
+#        connection-test-query: SELECT 1
+      read-ds:
+        url: jdbc:mysql://16.163.214.188:3306/robot_test?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false&allowPublicKeyRetrieval=true
+        type: com.alibaba.druid.pool.DruidDataSource
+        driverClassName: com.mysql.cj.jdbc.Driver
+        username: root
+        password: H^YXLL5#OKhj
+#        minimum-idle: 60
+#        maximum-pool-size: 500
+#        idle-timeout: 30000
+#        pool-name: MasterHikariCP
+#        max-lifetime: 120000
+#        connection-timeout: 30000
+#        connection-test-query: SELECT 1
+    sharding:
+      master-slave-rules:
+        ds0:
+          master-data-source-name: write-ds
+          slave-data-source-names: read-ds
+    props:
+      sql:
+        show: true
+#    masterslave:
+#      load-balance-algorithm-type: round_robin
+#      master-data-source-name: write-ds
+#      slave-data-source-names: read-ds
+#      name: ms
+
 logging:
   level:
-    io:
-      seata: warn
+    org:
+      apache:
+         shardingsphere: debug
 eureka:
   instance:
     hostname: 127.0.0.1

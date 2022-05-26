@@ -19,7 +19,7 @@ import javax.sql.DataSource;
 
 import com.alibaba.druid.pool.DruidDataSource;
 
-import io.seata.spring.annotation.datasource.EnableAutoDataSourceProxy;
+//import io.seata.spring.annotation.datasource.EnableAutoDataSourceProxy;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -33,7 +33,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
  */
 @SpringBootApplication
 @EnableEurekaClient
-@EnableAutoDataSourceProxy
+//@EnableAutoDataSourceProxy
 public class StockApplication {
 
     public static void main(String[] args) {

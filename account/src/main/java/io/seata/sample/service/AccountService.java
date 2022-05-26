@@ -15,8 +15,11 @@
  */
 package io.seata.sample.service;
 
+import io.seata.sample.dao.AccountTblMapper;
+import io.seata.sample.dao.ActivityMapper;
+import io.seata.sample.entity.AccountTbl;
+import io.seata.sample.entity.Activity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 /**
@@ -26,8 +29,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class AccountService {
 
+//    @Autowired
+//    private JdbcTemplate jdbcTemplate;
+
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private AccountTblMapper accountTblMapper;
+
+    @Autowired
+    private ActivityMapper activityMapper;
 
     public void reduce(String userId, int money) {
         try {
@@ -35,6 +44,18 @@ public class AccountService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        jdbcTemplate.update("update account_tbl set money = money - ? where user_id = ?", new Object[] {money, userId});
+//        jdbcTemplate.update("update account_tbl set money = money - ? where user_id = ?", new Object[] {money, userId});
+        accountTblMapper.updateMoney(money, userId);
+    }
+
+    public Activity search() {
+        return activityMapper.selectById(1);
+    }
+
+    public Boolean update(int status) {
+        Activity activity = activityMapper.selectById(1);
+        activity.setStatus(status);
+        int i = activityMapper.updateById(activity);
+        return i>0;
     }
 }

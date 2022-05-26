@@ -21,7 +21,7 @@ import javax.annotation.PostConstruct;
 
 import io.seata.sample.feign.OrderFeignClient;
 import io.seata.sample.feign.StockFeignClient;
-import io.seata.spring.annotation.GlobalTransactional;
+//import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -48,7 +48,7 @@ public class BusinessService {
      * @param commodityCode
      * @param orderCount
      */
-    @GlobalTransactional(rollbackFor =Exception.class)
+//    @GlobalTransactional(rollbackFor =Exception.class)
     public void purchase(String userId, String commodityCode, int orderCount) {
 
         try {

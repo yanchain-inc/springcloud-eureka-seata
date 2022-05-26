@@ -15,6 +15,7 @@
  */
 package io.seata.sample.controller;
 
+import io.seata.sample.entity.Activity;
 import io.seata.sample.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,5 +35,15 @@ public class AccountController {
     public Boolean debit(String userId, int money) {
         accountService.reduce(userId, money);
         return true;
+    }
+
+    @RequestMapping("/search")
+    public Activity search() {
+       return accountService.search();
+    }
+
+    @RequestMapping("/update")
+    public Boolean update(int status) {
+        return accountService.update(status);
     }
 }

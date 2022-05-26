@@ -19,7 +19,7 @@ import javax.sql.DataSource;
 
 import com.alibaba.druid.pool.DruidDataSource;
 
-import io.seata.spring.annotation.datasource.EnableAutoDataSourceProxy;
+//import io.seata.spring.annotation.datasource.EnableAutoDataSourceProxy;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,7 +30,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
  * @date 2019/06/14
  */
 @Configuration
-@EnableAutoDataSourceProxy
+//@EnableAutoDataSourceProxy
 public class DataSourceConfiguration {
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource")
